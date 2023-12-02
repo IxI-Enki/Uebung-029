@@ -1,65 +1,5 @@
-===============================  
- work in progres - cheat sheet  
-  .MD -- *formatting* :  
-
-This text is ***really important***!  
-**fat-text**  
-*italic*  
-
-  # Header - big  
-  ...  
-  ###### Header - small   
-
----
-
-*LISTS*:  
-1. step one
-2. step two
-
-* Item one
-* Item two
-
-- First item
-- Second item
-- Third item
-    - Indented item
-    - Indented item
-- Fourth item
- 
-*CODE*:  
-`Inlinecode`  
-
-```
-Beispiel für 
-einen Codeblock.
-```
-
-*COMMENTS*:  
-> Blockzitate müssen mit einer  
-> Leerzeile beginnen  
-> und enden  
-
-> Nested code  
-> block :  
->> example  
-
-> #### ADVANCED EXAMPLE!  
->  
-> - Beautiful  
-> - Nested  
->  
->  *COMMENTS* are **very ***nice*** to read**.  
-
-
-*LINKS*:  
-![Optionaler Alternativtext, falls sich das Bild nicht laden lässt](http://www.sampleurl.com/logo.png)  
-[Text to show on a link](http://www.sampleurl.com)  
-[![Alt-Text](imageurl)](linkurl)  
-
-===============================
-
-# Uebung-020  --  ...
-
+# Uebung-029  --  Zahlenraten
+<!--
 ## Lernziele:
 
 ## Aufgabenstellung:
@@ -74,12 +14,74 @@ einen Codeblock.
 
 
 
-
+-->
 -------------------------------
 # **SPOILER**
 
-## PAP-Designer:
+```c#
+using System;
 
-## Visual Studio:
+namespace Zahlenraten
+{
+  internal class Program
+  {
+    static void Main()
+    {
+      int rndNumber,
+          userInt = -1,
+          guessCounter = 1;
+      string userInput;
+      bool abort = false;
 
-## Ausgabe:
+      // generate a Random Number between 1 and 100:
+      Random random = new Random();
+      rndNumber = random.Next(1, 101);
+
+      Console.Write("\n           Zahlenraten          " +
+                    "\n================================" +
+                    "\n versuche meine Zahl zu erraten " +
+                    "\n ( von 1 bis 100 )");
+      do
+      {
+        Console.Write($"\n {guessCounter}. Versuch:  ");
+        userInput = Console.ReadLine();
+        int.TryParse(userInput, out userInt);
+        if ((userInput == "E") || (userInput == "e"))
+        {
+          abort = true;
+        }
+        else
+        {
+          if (userInt < rndNumber)
+          {
+            Console.Write("\n Gesuchte Zahl ist größer, ");
+          }
+          if (userInt > rndNumber)
+          {
+            Console.Write("\n Gesuchte Zahl ist kleiner, ");
+          }
+          guessCounter++;
+        }
+      } while ((!abort) && (userInt != rndNumber));
+
+      if (!abort)
+      {
+        if (guessCounter > 0 && guessCounter <= 5)
+        {
+          Console.Write("\n Tolle Leistung!");
+        }
+        else if (guessCounter > 5 && guessCounter <= 10)
+        {
+          Console.Write("\n Schon ganz gut!");
+        }
+        else
+          Console.Write("\n Endlich geschafft!");
+      }
+      Console.Write("\nZum Beenden bitte Eingabetaste drücken ...");
+      Console.ReadLine();
+      Console.Clear();
+    }
+  }
+}
+
+```
